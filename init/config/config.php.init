@@ -1,0 +1,72 @@
+<?php
+
+// +---------------------------------------------------------------------------+
+// | Should we run the system in debug mode? When this is on, there may be     |
+// | various side-effects. But for the time being it only deletes the cache    |
+// | upon start-up.                                                            |
+// |                                                                           |
+// | This should stay on while you're developing your application, because     |
+// | many errors can stem from the fact that you're using an old cache file.   |
+// +---------------------------------------------------------------------------+
+define('MO_DEBUG', false);
+
+// +---------------------------------------------------------------------------+
+// | Defines how error messages should be displayed to the user.  Valid values |
+// | are html, console, plain                                                  |
+// +---------------------------------------------------------------------------+
+define('MO_EXCEPTION_FORMAT', 'json');
+
+// +---------------------------------------------------------------------------+
+// | An absolute filesystem path to your web application directory. This       |
+// | directory is the root of your web application, which includes the core    |
+// | configuration files and related web application data.                     |
+// +---------------------------------------------------------------------------+
+define('MO_WEBAPP_DIR', dirname(__FILE__));
+define('MO_DOCROOT_DIR', dirname(__FILE__) . "/../docroot");
+
+// +---------------------------------------------------------------------------+
+// | An absolute filesystem path to the mojavi package. This directory         |
+// | contains all the Mojavi packages.                                         |
+// +---------------------------------------------------------------------------+
+if (trim('<<common_path>>') != '') {
+    define('MO_COMMON_DIR', '<<common_path>>'); // Usually /var/www/common
+} else {
+    define('MO_COMMON_DIR', dirname(__FILE__) . '/lib/'); // Usually /var/www/common
+}
+
+define('MO_APP_DIR', MO_COMMON_DIR . '/Mojavi');
+
+// +---------------------------------------------------------------------------+
+// | An absolute filesystem path to the directory where cache files will be    |
+// | stored.                                                                   |
+// |                                                                           |
+// | NOTE: If you're going to use a public temp directory, make sure this is a |
+// |       sub-directory of the temp directory. The cache system will attempt  |
+// |       to clean up *ALL* data in this directory.                           |
+// +---------------------------------------------------------------------------+
+define('MO_CACHE_DIR', MO_WEBAPP_DIR . '/cache');
+
+// +------------------------------------------------------------------------+
+// | Credential Value used for ensuring script is running from console         |
+// +------------------------------------------------------------------------+
+define('MO_CONSOLE_CREDENTIAL', '100');
+
+// +------------------------------------------------------------------------+
+// | Credential Value used for ensuring script is running from console         |
+// +------------------------------------------------------------------------+
+if (defined("USER_NAMESPACE")) {
+    define('APP_USER_NAMESPACE', USER_NAMESPACE . "/SESSFORM");
+} else {
+    define('APP_USER_NAMESPACE', "org/mojavi/SESSFORM");
+}
+
+// +------------------------------------------------------------------------+
+// | Define and set the library include path for any associated libraries   |
+// +------------------------------------------------------------------------+
+define('LIBRARY_PATH', MO_WEBAPP_DIR . DIRECTORY_SEPARATOR . 'lib');     
+    
+// Ensure library/ is on include_path
+set_include_path(implode(PATH_SEPARATOR, array(
+    LIBRARY_PATH,
+    get_include_path(),
+)));

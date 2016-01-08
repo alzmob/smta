@@ -1,0 +1,52 @@
+;
+; This is the default configuration file for installing rad.  Whenever you make
+; a change to this file, you need to run the install.sh script
+;
+; /home/flux/init/install.sh
+;
+
+; Set the API server for accessing the platform
+api_server=http://localhost
+
+; Set the url to use for realtime link building
+realtime_url=http://www.fluxrt.local
+
+; Set your database user credentials here
+db_host=localhost
+db_user=root
+db_pass=""
+
+; Define a name for your project
+session_key=flux
+
+; You can set the default items to show per page on list pages (the default is 50)
+;items_per_page=50
+
+; Set the UI theme you want to load for the platform
+theme=default
+
+; Sets the upload folder for uploading data
+upload_folder=%MO_WEBAPP_DIR%/meta/uploads
+upload_host=localhost
+upload_username=flux
+upload_password=m3g@gun
+
+; Set the location of the log folder where log files should go
+log_folder=/var/log/flux
+
+; Set the Page2Images API Key (http://www.page2images.com/)
+; API Key for development (*.flux.dev)
+;page2images_api=163e945a6c976b6b
+; API Key for production (*.directdrivehosting.com)
+page2images_api=0ee3e6ed2dc48ef9
+
+; Set the Analytic (op.js) tracking domain
+analytic_domain=localhost
+
+; Set the location of the version file
+version_file=%MO_WEBAPP_DIR%/meta/version
+
+; Set the outgoing mail username, password, and host
+mail_username=
+mail_password=
+mail_hostname=

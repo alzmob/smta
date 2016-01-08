@@ -1,0 +1,33 @@
+# Ignore Mac Files
+/nbproject/*
+
+# Ignore Zend files
+.buildpath
+.settings
+.dropbox
+.htaccess
+.DS_Store
+._.DS_Store
+
+# Ignore library files
+init/config.ini
+admin/webapp/cache/*
+api/webapp/cache/*
+api/webapp/lib/*
+api/webapp/lib/Zend
+api/webapp/lib/Mojavi
+api/webapp/lib/Smta
+
+# Ignore config files
+admin/webapp/config.php
+admin/webapp/config/databases.ini
+admin/webapp/config/factories.ini
+admin/webapp/config/logging.ini
+admin/webapp/config/settings.ini
+api/webapp/config.php
+api/webapp/config/databases.ini
+api/webapp/config/factories.ini
+api/webapp/config/logging.ini
+api/webapp/config/settings.ini
+
+# Ignore vendor files

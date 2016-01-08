@@ -1,0 +1,72 @@
+<VirtualHost *:80>
+    DocumentRoot /home/flux/admin/docroot/
+    ServerName www.flux.local
+
+    RewriteEngine On
+    RewriteRule ^/css/(.*) /css/$1 [QSA,L]
+    RewriteRule ^/scripts/(.*) /scripts/$1 [QSA,L]
+    RewriteRule ^/images/(.*) /images/$1 [QSA,L]
+    RewriteRule ^/img/(.*) /img/$1 [QSA,L]
+    RewriteRule ^/opcache\.php$ /opcache.php [QSA,L]
+    
+    RewriteCond %{REQUEST_URI} !/$
+    RewriteRule ^/([^.]+)/([^.]+)/([a-z0-9]+)$ /index.php?module=$1&action=$2&_id=$3 [L,QSA]
+    RewriteRule ^/([^.]+)/([^.]+)\.(.*)$ /index.php?module=$1&action=$2 [L,QSA]
+    RewriteRule ^/([^.]+)/([^.]+)$ /index.php?module=$1&action=$2 [L,QSA]
+    RewriteRule ^/([^.]+)\.(.*)$ /index.php?module=Default&action=$1 [L,QSA]
+    RewriteRule ^/([^.]+)$ /index.php?module=Default&action=$1 [L,QSA]
+
+    <Directory "/home/flux/admin/docroot/">
+        Options FollowSymLinks
+        AllowOverride None
+        Order allow,deny
+        Allow from all
+    </Directory>
+    
+</VirtualHost>
+
+<VirtualHost *:80>
+    DocumentRoot /home/flux/pub/docroot/
+    ServerName pub.flux.dev
+
+    RewriteEngine On
+    RewriteRule ^/css/(.*) /css/$1 [QSA,L]
+    RewriteRule ^/scripts/(.*) /scripts/$1 [QSA,L]
+    RewriteRule ^/images/(.*) /images/$1 [QSA,L]
+    RewriteRule ^/img/(.*) /img/$1 [QSA,L]
+    RewriteRule ^/opcache\.php$ /opcache.php [QSA,L]
+    
+    RewriteCond %{REQUEST_URI} !/$
+    RewriteRule ^/([^.]+)/([^.]+)/([a-z0-9]+)$ /index.php?module=$1&action=$2&_id=$3 [L,QSA]
+    RewriteRule ^/([^.]+)/([^.]+)\.(.*)$ /index.php?module=$1&action=$2 [L,QSA]
+    RewriteRule ^/([^.]+)/([^.]+)$ /index.php?module=$1&action=$2 [L,QSA]
+    RewriteRule ^/([^.]+)\.(.*)$ /index.php?module=Default&action=$1 [L,QSA]
+    RewriteRule ^/([^.]+)$ /index.php?module=Default&action=$1 [L,QSA]
+
+    <Directory "/home/flux/pub/docroot/">
+        Options FollowSymLinks
+        AllowOverride None
+        Order allow,deny
+        Allow from all
+    </Directory>
+    
+</VirtualHost>
+
+<VirtualHost *:80>
+    DocumentRoot /home/flux/api/docroot
+    ServerName api.flux.local
+
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} !/$
+    RewriteRule ^/([^.]+)/([^.]+)/([a-z0-9]+)$ /index.php?module=$1&action=$2&_id=$3 [L,QSA]
+    RewriteRule ^/([^.]+)/([^.]+)$ /index.php?module=$1&action=$2 [L,QSA]
+    RewriteRule ^/([^.]+)$ /index.php?module=Default&action=$1 [L,QSA]
+
+    <Directory /home/flux/api/docroot>
+        Options FollowSymLinks
+        AllowOverride None
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+</VirtualHost>

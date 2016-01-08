@@ -1,0 +1,3 @@
+# FLUX COMMANDS
+Cmnd_Alias FLUX = /home/flux/api/webapp/meta/crons/update.sh
+apache  ALL=NOPASSWD: FLUX

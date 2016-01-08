@@ -1,0 +1,21 @@
+#
+# Disable the emailing of the cron output to the root user
+#
+MAILTO=""
+
+#
+# Sync report data from networks 
+# 
+0,15,30,45 * * * * root /home/flux/api/webapp/meta/crons/report_client.sh
+
+#
+# Compile the number of clicks and conversions by offer and campaign
+# 
+0,15,30,45 * * * * root /home/flux/api/webapp/meta/crons/compile_daily_clicks.sh
+
+#
+# Run the watchdog cron to keep vsftpd and the daemons running
+#
+0,30 * * * * root /home/flux/api/webapp/meta/crons/watchdog.sh
+
+# End crontab
