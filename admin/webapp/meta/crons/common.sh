@@ -26,7 +26,7 @@ function execute() {
 		 		$CHGRP_BIN apache $LOG_FILE
 		 		$CHMOD_BIN 775 $LOG_FILE
 		 	fi
-			$NICE_BIN -n19 $COMMAND &>>$LOG_FILE &
+			$NICE_BIN -n19 $COMMAND &>$LOG_FILE &
 		else 
 			echo "WARNING: We cannot write to the log file at $LOG_FILE" 1>&2
 			echo "WARNING: We can still proceed, but will not background this process." 1>&2

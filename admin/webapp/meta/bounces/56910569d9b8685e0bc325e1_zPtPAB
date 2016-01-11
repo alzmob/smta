@@ -1,0 +1,12 @@
+XACK OFF
+EHLO john@slicksales.com
+XMRG FROM: john@slicksales.com VERP
+XDFN FIRSTNAME="Mark"
+XDFN LASTNAME="Hobson"
+XDFN EMAIL="hobby6@hotmail.com"
+XDFN *parts=1 *jobid="56910569d9b8685e0bc325e1"
+RCPT TO: <hobby6@hotmail.com>
+XPRT 1 LAST
+Hi, this is a message for [firstname] located at [email]
+
+.

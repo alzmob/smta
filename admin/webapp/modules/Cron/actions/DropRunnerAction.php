@@ -25,7 +25,7 @@ class DropRunnerAction extends BasicConsoleAction {
 	    	$drop->populate($_REQUEST);
 	    	$drop->query();
 	    	if (\MongoId::isValid($drop->getId())) {
-	    		\Mojavi\Util\StringTools::consoleWrite('Drop #' . $drop->getId(), null, \Mojavi\Util\StringTools::CONSOLE_COLOR_GREEN, true);
+	    		\Mojavi\Util\StringTools::consoleWrite('Drop #' . $drop->getId() . ' started at ' . date('m/d/Y g:i.s a'), null, \Mojavi\Util\StringTools::CONSOLE_COLOR_GREEN, true);
 	    		$drop->updatePercent(10);
 	    		if (!file_exists(MO_WEBAPP_DIR . '/meta/drops/')) {
 	    			mkdir(MO_WEBAPP_DIR . '/meta/drops/');
@@ -77,11 +77,14 @@ class DropRunnerAction extends BasicConsoleAction {
 		                        $tmp_body_contents .= $body_contents;
 		                        $tmp_body_contents .= PHP_EOL . '.' . PHP_EOL;
 		                        
-		                        $temp_filename = tempnam(MO_WEBAPP_DIR . '/meta/drops', $drop->getId() . '_');
+		                        $temp_filename = tempnam('/tmp', $drop->getId() . '_');
 		                        if ($counter % 100 == 0) {
 		                        	\Mojavi\Util\StringTools::consoleWrite('[ ' . $counter . ' ] Queued email ' . $line_array[self::EMAIL_KEY] . ' to ' . basename($temp_filename), null, \Mojavi\Util\StringTools::CONSOLE_COLOR_GREEN, true);
 		                        }
 		                        file_put_contents($temp_filename, $tmp_body_contents);
+		                        
+		                        chmod($temp_filename, 0777);
+		                        rename($temp_filename, MO_WEBAPP_DIR . '/meta/drops/' . basename($temp_filename));
 		    				} else {
 		    					throw new \Exception('Email missing');
 		    				}

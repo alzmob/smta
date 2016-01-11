@@ -101,6 +101,9 @@ case "$1" in
     status)
         $PMTA_SCRIPT $1
         ;;
+    console)
+        pmta show status
+        ;;
     log)
         tail -n500 /var/log/pmta/log
         ;;
@@ -134,7 +137,7 @@ case "$1" in
         $0 start
         ;;
     *)
-        echo "Usage: $0 {start|stop|status|try-restart|restart|force-reload|reload|clear-spools|log}"
+        echo "Usage: $0 {start|stop|status|try-restart|restart|force-reload|reload|clear-spools|log|console}"
         exit 1
         ;;
 esac

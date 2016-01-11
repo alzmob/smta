@@ -31,6 +31,20 @@ class PmtaConfigAction extends BasicRestAction
 	}
 	
 	/**
+	 * Executes a GET request
+	 * @return \Mojavi\Form\BasicAjaxForm
+	 */
+	function executeGet($input_form) {
+		// Handle PUT Requests
+		$ajax_form = new \Mojavi\Form\BasicAjaxForm();
+		$input_form->getMainConfig();
+		$input_form->getDomainConfig();
+		$input_form->getBackoffConfig();
+		$ajax_form->setRecord($input_form);
+		return $ajax_form;
+	}
+	
+	/**
 	 * Executes a PUT request
 	 * @return \Mojavi\Form\BasicAjaxForm
 	 */

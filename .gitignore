@@ -18,6 +18,10 @@ api/webapp/lib/Zend
 api/webapp/lib/Mojavi
 api/webapp/lib/Smta
 
+# Ignore drop and bad folders
+admin/webapp/meta/bounces/*
+admin/webapp/meta/drops/*
+
 # Ignore config files
 admin/webapp/config.php
 admin/webapp/config/databases.ini
@@ -31,3 +35,5 @@ api/webapp/config/logging.ini
 api/webapp/config/settings.ini
 
 # Ignore vendor files
+admin/webapp/composer.lock
+admin/webapp/vendor/oyejorge

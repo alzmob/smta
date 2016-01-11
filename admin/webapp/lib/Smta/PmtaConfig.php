@@ -12,9 +12,9 @@ class PmtaConfig extends CommonForm {
 	
 	private $ssh_session;
 	
-	protected $admin_ip_address;
-	protected $root_username;
-	protected $root_password;
+	private $admin_ip_address;
+	private $root_username;
+	private $root_password;
 	
 	protected $main_config;
 	protected $domain_config;
