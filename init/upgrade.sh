@@ -49,7 +49,7 @@ try {
             } else {
                 $module_name = array_shift($argv);
             }
-        } else if (trim($arg) != '/home/flux/init/upgrade.sh') {
+        } else if (trim($arg) != '/home/smta/init/upgrade.sh') {
             $arg_version = trim($arg);
         }
     }
@@ -69,7 +69,7 @@ try {
     
     // Start Output
     if (!$is_silent) {
-        echo StringTools::consoleColor('Flux Upgrade Script', StringTools::CONSOLE_COLOR_GREEN) . "\n";
+        echo StringTools::consoleColor('Smta Upgrade Script', StringTools::CONSOLE_COLOR_GREEN) . "\n";
         echo StringTools::consoleColor(str_repeat('=', 50), StringTools::CONSOLE_COLOR_GREEN) . "\n";
     }
     
@@ -77,14 +77,13 @@ try {
     if (!$is_silent) { StringTools::consoleWrite('Checking current version', null, StringTools::CONSOLE_COLOR_YELLOW, true); }
     $current_version = '0';
     try {
-        $preferences = new \Flux\Preferences();
+        $preferences = new \Smta\Setting();
         $ret_val = $preferences->query(array('key' => 'migration_version'), false);
         
         // If we don't have a version yet, the save a default one
         if (is_null($ret_val)) {
             $preferences->setKey('migration_version');
             $preferences->setValue('20000101');
-            $preferences->setControl(\Flux\Preferences::READ_WRITE_ADMIN);
             $preferences->insert();
         }
         
@@ -100,21 +99,21 @@ try {
     $new_version = $current_version;
     $revision_array = array();
     $revision_count = 0;
-    $version_folders = scandir($webapp_dir . '/lib/Flux/Migrations/');
+    $version_folders = scandir($webapp_dir . '/lib/Smta/Migration/');
     foreach ($version_folders as $version_folder) {
         if (strpos($version_folder, '.') === 0) { continue; }
         
-        if (file_exists($webapp_dir . '/lib/Flux/Migrations/' . $version_folder)) {
-            if (!$is_silent && $debug) { StringTools::consoleWrite(' - Scanning /lib/Flux/Migrations/' . $version_folder, null, StringTools::CONSOLE_COLOR_YELLOW, true); }
+        if (file_exists($webapp_dir . '/lib/Smta/Migration/' . $version_folder)) {
+            if (!$is_silent && $debug) { StringTools::consoleWrite(' - Scanning /lib/Smta/Migration/' . $version_folder, null, StringTools::CONSOLE_COLOR_YELLOW, true); }
             $migration_revision = str_replace('rev', '', $version_folder);
             if (($migration_revision > $current_version) || ($migration_revision == $arg_version) || ($migrate_greater_versions && ($migration_revision > $arg_version))) {
-                $revision_files = scandir($webapp_dir . '/lib/Flux/Migrations/' . $version_folder);
+                $revision_files = scandir($webapp_dir . '/lib/Smta/Migration/' . $version_folder);
                 foreach ($revision_files as $revision_file) {
                     if (strpos($revision_file, '.') === 0) { continue; }
                     if (strpos($revision_file, '.php') === false) { continue; }
-                    if (!$is_silent && $debug) { StringTools::consoleWrite('   - Adding /lib/Flux/Migrations/' . $version_folder . '/' . $revision_file, null, StringTools::CONSOLE_COLOR_YELLOW, true); }
+                    if (!$is_silent && $debug) { StringTools::consoleWrite('   - Adding /lib/Smta/Migration/' . $version_folder . '/' . $revision_file, null, StringTools::CONSOLE_COLOR_YELLOW, true); }
                     $revision_array[str_replace('rev', '', $migration_revision)][] = array(
-                            'file' => $webapp_dir . '/lib/Flux/Migrations/' . $version_folder . '/' . $revision_file,
+                            'file' => $webapp_dir . '/lib/Smta/Migration/' . $version_folder . '/' . $revision_file,
                             'revision' => str_replace('.', '', $version_folder));
                     $revision_count++;
                 }
@@ -138,7 +137,7 @@ try {
                 // Include the migration file, load the class and run the up() method to upgrade
                 require_once($revision_file);
                 $class_name = str_replace('.php', '', basename($revision_file));
-                $class_name = 'Flux\\Migrations\\' . $migration_revision . '\\' . $class_name;
+                $class_name = 'Smta\\Migration\\' . $migration_revision . '\\' . $class_name;
                 $class = new $class_name();
                 if (method_exists($class, 'up')) {
                     try {
@@ -166,7 +165,7 @@ try {
         // Finally update our current version
         if (!$is_silent) { StringTools::consoleWrite('Updating version', 'Writing', StringTools::CONSOLE_COLOR_YELLOW); }
         try {
-        	$preferences = new \Flux\Preferences();
+        	$preferences = new \Smta\Setting();
             $preferences->updateMultiple(array('key' => 'migration_version'), array('$set' => array('value' => $new_version)));
             if (!$is_silent) { StringTools::consoleWrite('Updating version', 'Saved as ' . $new_version, StringTools::CONSOLE_COLOR_GREEN, true); }
         } catch (Exception $e) {

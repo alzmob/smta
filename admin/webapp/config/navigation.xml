@@ -1,258 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nav>
-	<!-- ################################ -->
-	<!-- Start the MAIN ADMIN menu system -->
-	<!-- ################################ -->
-	<offer>
-        <label>Offers</label>
-        <uri>/offer/offer-search</uri>
+	<dashboard>
+        <label>Dashboard</label>
+        <uri>/default/index</uri>
         <class>nav-primary</class>
-        <permission>1</permission>
+	</dashboard>
+	<server>
+        <label>Server</label>
+        <uri>/server/pmta-console</uri>
+        <class>nav-primary</class>
         <pages>
-            <offersearch>
-                <label>Offers</label>
-                <uri>/offer/offer-search</uri>
+            <pmtaserver>
+                <label>PMTA Server</label>
+                <uri>/server/pmta-console</uri>
                 <class>nav-secondary</class>
-                <permission>1</permission>
-            </offersearch>
+            </pmtaserver>
+            <pmtalogs>
+                <label>PMTA Logs</label>
+                <uri>/server/pmta-log</uri>
+                <class>nav-secondary</class>
+            </pmtalogs>
+            <pmtaconfigs>
+                <label>PMTA Configs</label>
+                <uri>/server/configure-wizard</uri>
+                <class>nav-secondary</class>
+            </pmtaconfigs>
             <spacer>
 				<label></label>
 				<uri></uri>
 				<class>nav-secondary</class>
 				<permission>1</permission>
 			</spacer>
-			<!-- Insert Offer Saved Searches -->
-			<!-- <saved_searches_offer /> -->
-            <offerwizard>
-                <label>Add New Offer</label>
-                <uri>/offer/offer-wizard</uri>
+            <testips>
+                <label>Test IPs</label>
+                <uri>/server/test-ip-wizard</uri>
                 <class>nav-secondary</class>
-                <permission>1</permission>
-            </offerwizard>
+            </testips>
        </pages>
-	</offer>
-	<campaign>
-        <label>Campaigns</label>
-        <uri>/campaign/campaign-search</uri>
+	</server>
+	<drops>
+        <label>Drops</label>
+        <uri>/drop/drop-search</uri>
         <class>nav-primary</class>
-        <permission>1</permission>
         <pages>
-            <campaignsearch>
-                <label>Campaigns</label>
-                <uri>/campaign/campaign-search</uri>
+            <dropwizard>
+                <label>Create New Drop</label>
+                <uri>/drop/drop-wizard</uri>
                 <class>nav-secondary</class>
-                <permission>1</permission>
-            </campaignsearch>
+            </dropwizard>
             <spacer>
 				<label></label>
 				<uri></uri>
 				<class>nav-secondary</class>
 				<permission>1</permission>
 			</spacer>
-			<!-- Insert Campaign Saved Searches -->
-			<!-- <saved_searches_campaign /> -->
-            <campaignwizard>
-                <label>Add New Campaign</label>
-                <uri>/campaign/campaign-wizard</uri>
+			<dropsearch>
+                <label>View All Drops</label>
+                <uri>/drop/drop-search</uri>
                 <class>nav-secondary</class>
-                <permission>1</permission>
-            </campaignwizard>
+            </dropsearch>
        </pages>
-	</campaign>
-	<leads>
-        <label>Leads</label>
-        <uri>/lead/lead-search</uri>
-        <class>nav-primary</class>
-        <permission>1</permission>
-        <pages>
-            <leadsearch>
-                <label>Search All Leads</label>
-                <uri>/lead/lead-search</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </leadsearch>
-            <spacer>
-				<label></label>
-				<uri></uri>
-				<class>nav-secondary</class>
-				<permission>1</permission>
-			</spacer>
-			<!-- Insert Lead Saved Searches -->
-			<!-- <saved_searches_lead /> -->
-			<pendingtoday>
-                <label>Pending Leads Today</label>
-                <uri>/lead/lead-split-pending-today-search</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </pendingtoday>
-            <fulfilledtoday>
-                <label>Fulfilled Leads Today</label>
-                <uri>/lead/lead-split-fulfilled-today-search</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </fulfilledtoday>
-       </pages>
-	</leads>
-	<export>
-        <label>Splits</label>
-        <uri>/export/split-search</uri>
-        <class>nav-primary</class>
-        <permission>1</permission>
-        <pages>
-            <splitsearch>
-                <label>Splits</label>
-                <uri>/export/split-search</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </splitsearch>
-            <spacer2>
-				<label></label>
-				<uri></uri>>
-				<class>nav-secondary</class>
-				<permission>1</permission>
-			</spacer2>
-			<pendingtoday>
-                <label>Pending Leads Today</label>
-                <uri>/lead/lead-split-pending-today-search</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </pendingtoday>
-            <fulfilledtoday>
-                <label>Fulfilled Leads Today</label>
-                <uri>/lead/lead-split-fulfilled-today-search</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </fulfilledtoday>
-			<spacer3>
-				<label></label>
-				<uri></uri>>
-				<class>nav-secondary</class>
-				<permission>1</permission>
-			</spacer3>
-            <fulfillmentsearch>
-                <label>Fulfillment Handlers</label>
-                <uri>/admin/fulfillment-search</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </fulfillmentsearch>
-            <ubottest>
-                <label>Test Ubot Scripts</label>
-                <uri>/export/ubot-test</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </ubottest>
-       </pages>
-	</export>
-	<reports>
-        <label>Reporting</label>
-        <uri>/report/revenue-report</uri>
-        <class>nav-primary</class>
-        <permission>1</permission>
-        <pages>
-            <dashboard>
-                <label>Dashboard</label>
-                <uri>/default/index</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </dashboard>
-            <spacer>
-				<label></label>
-				<uri></uri>>
-				<class>nav-secondary</class>
-				<permission>1</permission>
-			</spacer>
-            <revenue>
-                <label>Revenue Report</label>
-                <uri>/report/revenue-report</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </revenue>
-            <leadpayoutreport>
-                <label>Lead Payout Report</label>
-                <uri>/report/lead-payout-report</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </leadpayoutreport>
-            <spacer2>
-				<label></label>
-				<uri></uri>>
-				<class>nav-secondary</class>
-				<permission>1</permission>
-			</spacer2>
-            <reconcileleadpayout>
-                <label>Reconcile Lead Payouts</label>
-                <uri>/report/reconcile-lead-payout</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </reconcileleadpayout>
-            <importleadpayout>
-                <label>Import Lead Payouts</label>
-                <uri>/report/import-lead-payout</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </importleadpayout>
-       </pages>
-	</reports>
+	</drops>
 	<admin>
         <label>Admin</label>
-        <uri>/admin/preferences</uri>
+        <uri>/admin/setting</uri>
         <class>nav-primary</class>
         <permission>1</permission>
         <pages>
-            <datafield>
+        	<datafields>
                 <label>Data Fields</label>
                 <uri>/admin/data-field-search</uri>
                 <class>nav-secondary</class>
                 <permission>1</permission>
-            </datafield>
-            <vertical>
-                <label>Verticals</label>
-                <uri>/admin/vertical-search</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </vertical>
+            </datafields>
             <domaingroups>
                 <label>Domain Groups</label>
                 <uri>/admin/domain-group-search</uri>
                 <class>nav-secondary</class>
                 <permission>1</permission>
             </domaingroups>
-            <servers>
-                <label>Servers</label>
-                <uri>/admin/server-search</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </servers>
-            <zipcodes>
-                <label>Zipcodes</label>
-                <uri>/admin/zip-search</uri>
-				<class>nav-secondary</class>
-				<permission>1</permission>
-            </zipcodes>
-            <spacer>
-				<label></label>
-				<uri></uri>>
-				<class>nav-secondary</class>
-				<permission>1</permission>
-			</spacer>
-			<clients>
-                <label>Clients</label>
-                <uri>/client/client-search</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </clients>
-			<users>
-                <label>Users</label>
-                <uri>/admin/user-search</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </users>
-            <trafficsources>
-                <label>Traffic Sources</label>
-                <uri>/admin/traffic-source-search</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </trafficsources>
             <spacer2>
 				<label></label>
 				<uri></uri>>
@@ -265,15 +91,9 @@
                 <class>nav-secondary</class>
                 <permission>1</permission>
             </daemonsearch>
-            <savedsearch>
-                <label>Saved Searches</label>
-                <uri>/admin/saved-search-search</uri>
-                <class>nav-secondary</class>
-                <permission>1</permission>
-            </savedsearch>
             <setting>
                 <label>Global Settings</label>
-                <uri>/admin/preferences</uri>
+                <uri>/admin/setting</uri>
                 <class>nav-secondary</class>
                 <permission>1</permission>
             </setting>
@@ -291,70 +111,4 @@
             </logout>
        </pages>
 	</admin>
-	<!-- ################################ -->
-	<!-- Start the DATA ENTRY menu system -->
-	<!-- ################################ -->
-	<leads_data_entry>
-        <label>Leads</label>
-        <uri>/lead/lead-search</uri>
-        <class>nav-primary</class>
-        <permission>2</permission>
-        <pages>
-            <leadsearch>
-                <label>Search All Leads</label>
-                <uri>/lead/lead-search</uri>
-                <class>nav-secondary</class>
-                <permission>2</permission>
-            </leadsearch>
-            <spacer>
-				<label></label>
-				<uri></uri>
-				<class>nav-secondary</class>
-				<permission>2</permission>
-			</spacer>
-			<!-- Insert Lead Saved Searches -->
-			<!-- <saved_searches_lead /> -->
-       </pages>
-	</leads_data_entry>
-	<logout_data_entry>
-        <label>Logout</label>
-        <uri>/default/logout</uri>
-        <class>nav-secondary</class>
-        <permission>2</permission>
-    </logout_data_entry>
-    <!-- ################################# -->
-	<!-- Start the REPORT ONLY menu system -->
-	<!-- ################################# -->
-	<reporting_reports_only>
-        <label>Reporting</label>
-        <uri>/report/revenue-report</uri>
-        <class>nav-primary</class>
-        <permission>3</permission>
-        <pages>
-            <dashboard>
-                <label>Dashboard</label>
-                <uri>/default/index</uri>
-                <class>nav-secondary</class>
-                <permission>3</permission>
-            </dashboard>
-            <spacer>
-				<label></label>
-				<uri></uri>>
-				<class>nav-secondary</class>
-				<permission>3</permission>
-			</spacer>
-            <revenue>
-                <label>Revenue Report</label>
-                <uri>/report/revenue-report</uri>
-                <class>nav-secondary</class>
-                <permission>3</permission>
-            </revenue>
-       </pages>
-	</reporting_reports_only>
-	<logout_reports_only>
-        <label>Logout</label>
-        <uri>/default/logout</uri>
-        <class>nav-secondary</class>
-        <permission>3</permission>
-    </logout_reports_only>
 </nav>

@@ -1,0 +1,6 @@
+#######################
+# local config
+#######################
+
+pickup /home/rad/cli/webapp/meta/drop/pending /home/rad/cli/webapp/meta/drop/bad
+include /home/rad/cli/webapp/meta/vmta/*.cfg

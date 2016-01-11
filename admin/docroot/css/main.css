@@ -1,0 +1,202 @@
+@CHARSET "ISO-8859-1";
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body { 
+    margin-bottom: 80px;
+}
+
+div.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 50px;
+	background-color: #f5f5f5;
+	border-top: 1px solid #C8C8C8;
+}
+
+.title-header {
+	font-size: 24px;
+	text-align: left;
+	position: relative;
+	padding: 10px 0px 30px 0px;
+	color: #f2f6f7;
+	text-shadow: 0 1px 0 rgba(0,0,0,.1);
+	background-color: #022A4E;
+	margin-Bottom: 15px;
+}
+
+.data_field_selectize {
+	border-bottom: 1px dotted #C8C8C8;
+}
+
+/* Add classes to selectize controls for loading */
+.selectize::before {
+	-moz-transition: opacity 0.2s;
+	-webkit-transition: opacity 0.2s;
+	transition: opacity 0.2s;
+	content: ' ';
+	z-index: 2;
+	position: absolute;
+	display: block;
+	top: 8px;
+	right: 16px;
+	width: 16px;
+	height: 16px;
+	background: url('/images/spinner.gif');
+	background-size: 16px 16px;
+	opacity: 0;
+}
+.selectize.loading::before {
+	opacity: 0.4;
+}
+
+/* Set classes for showing a media object within a selectize drop down */
+
+.media .name,
+.selectize-dropdown .name,
+.selectize-input .name {
+	font-weight: bold;
+	margin-right: 5px;
+}
+.media .title,
+.selectize-dropdown .title,
+.selectize-input .title {
+	display: block;
+}
+
+.media .description,
+.selectize-dropdown .description,
+.selectize-input .description {
+	font-size: 12px;
+	display: block;
+	color: #a0a0a0;
+	width: 100%;
+	overflow: hidden;
+}
+
+.media .meta,
+.selectize-dropdown .meta,
+.selectize-input .meta {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	font-size: 10px;
+}
+
+.media .meta li,
+.selectize-dropdown .meta li,
+.selectize-input .meta li {
+	margin: 0;
+	padding: 0;
+	display: inline;
+	margin-right: 10px;
+}
+
+.media .meta li,
+.selectize-dropdown .meta li span,
+.selectize-input .meta li span {
+	font-weight: bold;
+}
+
+table.mapping_fields tbody td {
+	border: 1px solid #C8C8C8;
+	padding: 2px;
+	text-align: center;
+}
+table.mapping_fields thead th,
+table.mapping_fields thead td {
+	border: 1px solid #ABABAB;
+	background: #f5f5f5;
+	padding: 2px;
+	min-width:150px;
+}
+
+textarea.code_snippet,
+pre.code_snippet,
+div.code_snippet
+{
+    display: block;
+    width: 600px;
+    height: 100px;
+    padding: 10px 0px 0px 10px;
+    margin: 0px auto 15px;
+    background: rgb(244,244,244);
+    border: solid rgb(200,200,200) 1px;
+    overflow-y: auto;
+}
+
+.view-title {
+    color: #3399FF;
+}
+
+.sub-header {
+    color: #666666;
+    border-Bottom: 1px solid #CCCCCC;
+    width: 100%;
+}
+
+.view-details {
+    color: #666666;
+}
+
+.textarea-list {
+    font-family: arial,helvetica,sans-serif;
+    font-Size: 10pt;
+    color: #666666;
+    width: 100%;
+    border: none;
+}
+
+.sub-section-scroll {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.code {
+    font-family: "Courier New";
+    font-size: 10pt;
+}
+
+.sub-section-scroll hr {
+    background: #E2E1D5; color: #E2E1D5; border: 0; height: 1px;
+}
+
+.thumbnail {
+    border: 1px solid #CCCCCC;
+    width: 133px;
+    min-height: 96px;
+    margin: 5px;
+}
+
+.dark {
+    background-Color: #E8E8E8;
+}
+
+.lite {
+    background-Color: transparent;
+}
+
+.odd .slick-cell {
+  background-color: #FCFCFC;
+}
+
+.color-picker { min-height:24px; min-width:24px; border:1px solid; margin: 2px; }
+
+
+
+.tab-pane-box {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0px 0px 5px 5px;
+    padding: 10px;
+}
+
+.nav-tabs-box {
+    margin-bottom: 0;
+}

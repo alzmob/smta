@@ -10,8 +10,6 @@ try {
     $init_dir = dirname(__FILE__) . '/';
     $base_dir = realpath($init_dir . '../') . '/';
     $admin_base_dir = $base_dir . 'admin/';
-    $api_base_dir = $base_dir . 'api/';
-    $pub_base_dir = $base_dir . 'pub/';
     $settings_file = $init_dir . 'config.ini';
     
     $is_silent = false;
@@ -22,7 +20,7 @@ try {
     
     // Start Output
     if (!$is_silent) {
-        echo StringTools::consoleColor('Flux Installation Script', StringTools::CONSOLE_COLOR_GREEN) . "\n";
+        echo StringTools::consoleColor(' Installation Script', StringTools::CONSOLE_COLOR_GREEN) . "\n";
         echo StringTools::consoleColor(str_repeat('=', 50), StringTools::CONSOLE_COLOR_GREEN) . "\n";
         
         echo 'Configuring your application';
@@ -41,12 +39,12 @@ try {
     // | Setup the DAO modules and any other links that need to be setup        |
     // +------------------------------------------------------------------------+
     $lib_folders = array(
-        'Flux' => 'Flux',
+        '' => '',
         'Mojavi' => 'Mojavi',
         'Zend' => 'Zend',
     );
     
-    
+    /*
     foreach ($lib_folders as $lib_name => $lib_folder) {
         if (!$is_silent) { StringTools::consoleWrite(' - dao path', $lib_folder, StringTools::CONSOLE_COLOR_YELLOW); }
         if (file_exists($admin_base_dir . 'webapp/lib/' . $lib_folder) && is_dir($admin_base_dir . 'webapp/lib/' . $lib_folder)) {
@@ -61,22 +59,13 @@ try {
                 $cmd = 'ln -s ' . $admin_base_dir . 'webapp/lib/' . $lib_folder . ' ' . $api_base_dir . 'webapp/lib/' . $lib_folder;
                 shell_exec($cmd);
             }
-            // Setup lib for pub
-            if (!file_exists($pub_base_dir . "webapp/lib/" . $lib_folder) && !is_link($pub_base_dir . "webapp/lib/" . $lib_folder)) {
-                $cmd = 'ln -s ' . $admin_base_dir . '/webapp/lib/' . $lib_folder . ' ' . $pub_base_dir . 'webapp/lib/' . $lib_folder;
-                shell_exec($cmd);
-            } else if (is_link($pub_base_dir . "webapp/lib/" . $lib_folder)) {
-                $cmd = 'rm -f  ' . $pub_base_dir . 'webapp/lib/' . $lib_folder;
-                shell_exec($cmd);
-                
-                $cmd = 'ln -s ' . $admin_base_dir . 'webapp/lib/' . $lib_folder . ' ' . $pub_base_dir . 'webapp/lib/' . $lib_folder;
-                shell_exec($cmd);
-            }
         }
     }
+    */
     if (!$is_silent) { StringTools::consoleWrite(' - dao path', 'Saved', StringTools::CONSOLE_COLOR_GREEN, true); }
     
     if (!$is_silent) { StringTools::consoleWrite(' - vendors', 'linking', StringTools::CONSOLE_COLOR_YELLOW); }
+    /*
     if (file_exists($admin_base_dir . 'webapp/vendor/') && is_dir($admin_base_dir . 'webapp/vendor/')) {
         // Setup lib for api
         if (!file_exists($api_base_dir . 'webapp/vendor') && !is_link($api_base_dir . 'webapp/vendor')) {
@@ -89,6 +78,7 @@ try {
             $cmd = 'ln -s ' . $admin_base_dir . 'webapp/vendor' . ' ' . $api_base_dir . 'webapp/vendor';
             shell_exec($cmd);
         }
+        
         if (!file_exists($pub_base_dir . 'webapp/vendor') && !is_link($pub_base_dir . 'webapp/vendor')) {
             $cmd = 'ln -s ' . $admin_base_dir . '/webapp/vendor' . ' ' . $pub_base_dir . 'webapp/vendor';
             shell_exec($cmd);
@@ -100,7 +90,7 @@ try {
             shell_exec($cmd);
         }
 	}
-    
+    */
     if (!$is_silent) { StringTools::consoleWrite(' - vendors', 'Saved', StringTools::CONSOLE_COLOR_GREEN, true); }
     
     // +------------------------------------------------------------------------+
@@ -128,8 +118,6 @@ try {
         }
         
         file_put_contents($admin_base_dir . "webapp/config/databases.ini", $config_contents);
-        file_put_contents($api_base_dir . "webapp/config/databases.ini", $config_contents);
-        file_put_contents($pub_base_dir . "webapp/config/databases.ini", $config_contents);
         if (isset($ini_settings['db_host']) && trim($ini_settings['db_host']) != '') {
             if (!$is_silent) { StringTools::consoleWrite(' - databases', $ini_settings['db_host'], StringTools::CONSOLE_COLOR_GREEN, true); }
         } else {
@@ -156,8 +144,6 @@ try {
         }
         
         file_put_contents($admin_base_dir . "webapp/config.php", $config_contents);
-        file_put_contents($api_base_dir . "webapp/config.php", $config_contents);
-        file_put_contents($pub_base_dir . "webapp/config.php", $config_contents);
         if (isset($ini_settings['common_path']) && trim($ini_settings['common_path']) != '') {
             if (!$is_silent) { StringTools::consoleWrite(' - mojavi framework', $ini_settings['common_path'], StringTools::CONSOLE_COLOR_GREEN, true); }
         } else {
@@ -176,8 +162,6 @@ try {
     $htaccess_contents[] = 'RewriteRule ^/index/(.*)/(.*).html /index.php?module=$1&action=$2 [QSA]';
     $htaccess_contents[] = 'RewriteRule ^/(.*)/(.*).html /index.php?module=$1&action=$2 [QSA]';
     file_put_contents($admin_base_dir . "docroot/.htaccess", $htaccess_contents);
-    file_put_contents($api_base_dir . "docroot/.htaccess", $htaccess_contents);
-    file_put_contents($pub_base_dir . "docroot/.htaccess", $htaccess_contents);
     if (!$is_silent) { StringTools::consoleWrite(' - htaccess', 'Saved', StringTools::CONSOLE_COLOR_GREEN, true); }
     */
     // +------------------------------------------------------------------------+
@@ -198,8 +182,6 @@ try {
             $factory_contents = str_replace("<<proj_name>>", basename(dirname($init_dir)), $factory_contents);
         }
         file_put_contents($admin_base_dir . "webapp/config/factories.ini", $factory_contents);
-        file_put_contents($api_base_dir . "webapp/config/factories.ini", $factory_contents);
-        file_put_contents($pub_base_dir . "webapp/config/factories.ini", $factory_contents);
         if (!$is_silent) { StringTools::consoleWrite(' - project', 'Saved', StringTools::CONSOLE_COLOR_GREEN, true); }
     }
     
@@ -214,8 +196,6 @@ try {
         if (!$is_silent) { StringTools::consoleWrite(' - logging', 'Saving', StringTools::CONSOLE_COLOR_YELLOW); }
         $logging_contents = file_get_contents($init_dir . "/config/logging.ini");
         file_put_contents($admin_base_dir . "webapp/config/logging.ini", $logging_contents);
-        file_put_contents($api_base_dir . "webapp/config/logging.ini", $logging_contents);
-        file_put_contents($pub_base_dir . "webapp/config/logging.ini", $logging_contents);
         if (!$is_silent) { StringTools::consoleWrite(' - logging', 'Saved', StringTools::CONSOLE_COLOR_GREEN, true); }
     }
     
@@ -256,7 +236,7 @@ try {
         if (isset($ini_settings['upload_username'])) {
             $settings_contents = preg_replace("/<<upload_username>>/", $ini_settings['upload_username'], $settings_contents);
         } else {
-            $settings_contents = preg_replace("/<<upload_username>>/", 'flux', $settings_contents);
+            $settings_contents = preg_replace("/<<upload_username>>/", 'smta', $settings_contents);
         }
         if (isset($ini_settings['upload_password'])) {
             $settings_contents = preg_replace("/<<upload_password>>/", $ini_settings['upload_password'], $settings_contents);
@@ -278,18 +258,13 @@ try {
             passthru('chown ' . $cache_user . ':' . $cache_group . ' ' . $ini_settings['log_folder']. ' -Rf');
             passthru('chmod 775 ' . $ini_settings['log_folder']. ' -Rf');
         } else {
-            $settings_contents = preg_replace("/<<log_folder>>/", '/var/log/flux', $settings_contents);
+            $settings_contents = preg_replace("/<<log_folder>>/", '/var/log/smta', $settings_contents);
             
             $cache_user = isset($ini_settings['cache_user']) ? $ini_settings['cache_user'] : 'apache';
             $cache_group = isset($ini_settings['cache_group']) ? $ini_settings['cache_group'] : 'apache';
             
-            passthru('chown ' . $cache_user . ':' . $cache_group . ' /var/log/flux -Rf');
-            passthru('chmod 775 /var/log/flux -Rf');
-        }
-        if (isset($ini_settings['realtime_url'])) {
-            $settings_contents = preg_replace("/<<realtime_url>>/", $ini_settings['realtime_url'], $settings_contents);
-        } else {
-            $settings_contents = preg_replace("/<<realtime_url>>/", 'http://www.fluxrt.local', $settings_contents);
+            passthru('chown ' . $cache_user . ':' . $cache_group . ' /var/log/smta -Rf');
+            passthru('chmod 775 /var/log/smta -Rf');
         }
         if (isset($ini_settings['version_file'])) {
             $settings_contents = preg_replace("/<<version_file>>/", $ini_settings['version_file'], $settings_contents);
@@ -347,8 +322,6 @@ try {
             $settings_contents = preg_replace("/<<analytic_domain>>/", 'directdrivehosting.com', $settings_contents);
         }
         file_put_contents($admin_base_dir . "webapp/config/settings.ini", $settings_contents);
-        file_put_contents($api_base_dir . "webapp/config/settings.ini", $settings_contents);
-        file_put_contents($pub_base_dir . "webapp/config/settings.ini", $settings_contents);
         if (!$is_silent) { StringTools::consoleWrite(' - settings', 'Saved', StringTools::CONSOLE_COLOR_GREEN, true); }
     }
 
@@ -358,9 +331,7 @@ try {
     // | end so that all of our new changes take effect.                        |
     // +------------------------------------------------------------------------+
     $cache_folders = array(
-        $admin_base_dir . 'webapp/cache/',
-        $api_base_dir . 'webapp/cache/',
-        $pub_base_dir . 'webapp/cache/'
+        $admin_base_dir . 'webapp/cache/'
     );
     foreach ($cache_folders as $cache_folder) {
         if ($cache_handle = opendir($cache_folder)) {
@@ -388,10 +359,6 @@ try {
     $global_folders = array(
         "Cache (admin)" => $admin_base_dir . 'webapp/cache/',
         "Meta (admin)" => $admin_base_dir . 'webapp/meta/',
-        "Cache (api)" => $api_base_dir . 'webapp/cache/',
-        "Meta (api)" => $api_base_dir . 'webapp/meta/',
-        "Cache (pub)" => $pub_base_dir . 'webapp/cache/',
-        "Meta (pub)" => $pub_base_dir . 'webapp/meta/',
     );
     
     foreach ($global_folders as $key => $global_folder) {

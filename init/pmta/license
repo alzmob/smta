@@ -1,0 +1,15 @@
+#--- CUT HERE --- THIS IS THE LAK -----------------------
+product: PowerMTA
+version: 3.5
+platform: linux-intel
+units: 0
+options: H,gm-imprinter
+licensee: RR Media
+serial: RRMedia-8-150692
+comment: LAK
+issued: 2008-04-03
+expires: never
+copyright: Port25 Solutions, Inc.  All Rights Reserved
+check: 1-JnClk4IRvLbQDXHsYhYLKcpjMsI8iZJhq65wvJ+FqsbtKy8c
+       EWaKvF/EukPCTf398x9rG5R+NCl/RNJZAaPWuw==
+#--- CUT HERE -------------------------------------------

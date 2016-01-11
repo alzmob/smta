@@ -1,0 +1,159 @@
+# Configuration defaults for PowerMTA
+#
+# WARNING: do not change this file, as it is overwritten during installation.
+# Make any changes to the local and domain configuration file instead.
+
+# Define the domain keys
+domain-key k1,*,/etc/pmta/dkim.private
+
+# Settings per source 
+total-max-smtp-in                    120
+<source-group highConnections>
+    max-smtp-in                      120
+</source-group>
+
+# Global source variables
+<source 0/0>
+    add-date-header                  yes
+    add-message-id-header            yes
+    add-received-header              no
+    allow-mailmerge                  yes
+    always-allow-api-submission      yes
+    hide-message-source              yes
+    log-commands                     no
+    log-connections                  no
+    log-data                         no
+    max-message-size                 0
+    process-x-envid                  yes
+    process-x-job                    yes
+    process-x-virtual-mta            yes
+    smtp-service                     no
+</source>
+
+# Pickup source settings
+<source {pickup}>
+    always-allow-relaying            yes
+</source>
+
+# SMTP source settings
+<source 127.0.0.1>
+    always-allow-relaying            yes   
+    smtp-service                     yes            
+    disconnect-on-transient-error    yes
+    source-group                     highConnections
+</source>
+
+# Global config settins
+http-mgmt-port              8080
+http-access 127.0.0.1       admin
+http-access 64.58.181.209   admin
+run-as-root                 no
+total-max-smtp-out          12000
+
+# Logging 
+log-file                    /var/log/pmta/log
+log-rotate                  5
+
+<acct-file /var/log/pmta/bounce.csv>
+    records                 b
+    world-readable          true
+    move-to                 /home/rad/cli/webapp/meta/accounting/bounce
+    move-interval           1h
+    max-size                5M
+    sync                    no
+    record-fields           b  bounceCat,rcpt,jobId,dlvSourceIp,vmta,*
+</acct-file>
+
+<acct-file /var/log/pmta/delivered.csv>
+    records                 d
+    world-readable          true
+    move-to                 /home/rad/cli/webapp/meta/accounting/delivered
+    max-size                5M
+    move-interval           1h
+    sync                    no
+    record-fields           d  timeLogged,timeQueued,orig,rcpt,dlvSourceIp,dlvDestinationIp,vmta,jobId,envId
+</acct-file>
+
+<acct-file /var/log/pmta/transient.csv>
+    records                 t,tq
+    world-readable          true
+    move-to                 /home/rad/cli/webapp/meta/accounting/transient
+    max-size                5M
+    move-interval           1h
+    sync                    no
+    record-fields           tq  timeLogged,dlvSourceIp,dlvDestinationIp,vmta,dsnMta,dsnDiag,dsnStatus
+</acct-file>
+
+# Spool directories
+spool                       /var/spool/pmta
+sync-msg-create             no
+sync-msg-update             no
+
+# bounce directories
+<bounce-category-patterns>
+    /spam/ ip-bounce
+    /junk mail/ ip-bounce
+    /blacklist/ ip-bounce
+    /blocked/ ip-bounce
+    /\bU\.?C\.?E\.?\b/ ip-bounce
+    /\bAdv(ertisements?)?\b/ ip-bounce
+    /unsolicited/ ip-bounce
+    /\b(open)?RBL\b/ ip-bounce
+    /realtime blackhole/ ip-bounce
+    /http:\/\/basic.wirehub.nl\/blackholes.html/ ip-bounce
+    /\bvirus\b/ virus-related
+    /message +content/ content-related
+    /content +rejected/ content-related
+    /quota/ soft-bounce
+    /limit exceeded/ quota-issues
+    /mailbox +(is +)?full/ soft-bounce
+    /\bstorage\b/ soft-bounce
+    /(user|mailbox|recipient|rcpt|local part|address|account|mail drop|ad(d?)ressee) (has|has been|is)? *(currently|temporarily +)?(disabled|expired|inactive|not activated)/ soft-bounce
+    /(conta|usu.rio) inativ(a|o)/ soft-bounce
+    /Too many (bad|invalid|unknown|illegal|unavailable) (user|mailbox|recipient|rcpt|local part|address|account|mail drop|ad(d?)ressee)/ ip-bounce
+    /(No|No such|bad|invalid|unknown|illegal|unavailable) (local +)?(user|mailbox|recipient|rcpt|local part|address|account|mail drop|ad(d?)ressee)/ hard-bounce
+    /(user|mailbox|recipient|rcpt|local part|address|account|mail drop|ad(d?)ressee) +(\S+@\S+ +)?(not (a +)?valid|not known|not here|not found|does not exist|bad|invalid|unknown|illegal|unavailable)/ hard-bounce
+    /\S+@\S+ +(is +)?(not (a +)?valid|not known|not here|not found|does not exist|bad|invalid|unknown|illegal|unavailable)/ hard-bounce
+    /recipient never logged on/ soft-bounce
+    /Address (rejected|was not found)/ hard-bounce
+    /server doesn't handle mail for that user/ relaying-issues
+    /no mailbox here by that name/ hard-bounce
+    /my badrcptto list/ hard-bounce
+    /not our customer/ hard-bounce
+    /no longer (valid|available)/ hard-bounce
+    /have a \S+ account/ hard-bounce
+    /\brelay(ing)?/ relaying-issues
+    /domain (retired|bad|invalid|unknown|illegal|unavailable)/ relaying-issues
+    /domain no longer in use/ relaying-issues
+    /domain (\S+ +)?(is +)?obsolete/ relaying-issues
+    /Greylist/ grey-list
+    /denied/ policy-related
+    /prohibit/ policy-related
+    /rejected/ policy-related
+    /refused/ policy-related
+    /allowed/ policy-related
+    /banned/ policy-related
+    /policy/ policy-related
+    /suspicious activity/ policy-related
+    /bad sequence/ protocol-errors
+    /syntax error/ protocol-errors
+    /\broute\b/ routing-errors
+    /\bunroutable\b/ routing-errors
+    /\bunrouteable\b/ routing-errors
+    /^2.\d.\d/ success
+    /^[45]\.1\.1/ hard-bounce
+    /^[45]\.1\.2/ relaying-issues
+    /^[45]\.3\.5/ bad-configuration
+    /^[45]\.4\.1/ no-answer-from-host
+    /^[45]\.4\.2/ bad-connection
+    /^[45]\.4\.4/ routing-errors
+    /^[45]\.4\.6/ routing-errors
+    /^[45]\.4\.7/ message-expired
+    /^[45]\.7\.1/ policy-related
+    // other # catch-all
+</bounce-category-patterns>
+
+# Include the local and domain config files
+include                 /etc/pmta/backoff_config
+include                 /etc/pmta/domain_config
+include                 /etc/pmta/local_config

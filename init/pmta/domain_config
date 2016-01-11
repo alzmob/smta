@@ -1,0 +1,195 @@
+#######################
+# domain config
+#######################
+
+domain-macro aol aol.com, aim.com
+domain-macro earthlink earthlink.net, mindspring.com, peoplepc.com
+domain-macro excite excite.com
+domain-macro gmail gmail.com, google.com
+domain-macro hotmail hotmail.com, live.nl, msn.com, hotmail.co.uk, live.com
+domain-macro juno juno.com, netzero.com, netzero.net
+domain-macro orange orange.fr
+domain-macro sbc sbcglobal.net, sbcglobal.com, ameritech.net, pacbell.net, flash.net, prodigy.net, snet.net, swbell.net
+domain-macro verizon verizon.net, bellatlantic.net, gte.net
+domain-macro yahoo yahoo.com, ymail.com, rocketmail.com, yahoo.com.au
+
+<domain *>
+    421-means-mx-unavailable                yes
+    bounce-upon-5xx-greeting                yes
+    deliver-local-dsn                       no
+    log-commands                            yes
+    max-rcpt-per-message                    10
+    max-smtp-out                            10
+    smtp-greeting-timeout                   11m
+    smtp-data-termination-timeout           11m
+    connect-timeout                         2m
+    data-send-timeout                       6m
+    type                                    smtp
+    assume-delivery-upon-data-termination-timeout yes
+</domain>
+
+<domain $aol>
+    queue-to                                aol.queue
+</domain>
+<domain aol.queue>
+    route                                   64.12.90.34,64.12.90.66,64.12.138.161,205.188.103.2,205.188.146.194,64.12.90.33,64.12.90.97,64.12.137.161,205.188.190.2,205.188.156.193,64.12.139.193,205.188.59.193,205.188.103.1,205.188.155.110,205.188.190.1,64.12.90.65,64.12.137.162,64.12.90.1,64.12.90.98,205.188.159.42,205.188.146.193,205.188.59.194	
+    421-means-mx-unavailable                yes
+    bounce-upon-5xx-greeting                yes
+    deliver-local-dsn                       no
+    log-commands                            yes
+    retry-upon-new-mail		                yes
+    max-rcpt-per-message                    10
+    max-msg-per-connection                  10
+    max-smtp-out                            10
+    smtp-pattern-list                       aol-throttle 
+</domain>
+
+<domain $earthlink>
+    queue-to                                earthlink.queue
+</domain>
+<domain earthlink.queue>
+    route                                   earthlink.net
+    bounce-upon-5xx-greeting                no
+    deliver-local-dsn                       no
+    log-commands                            no
+    max-rcpt-per-message                    1
+    max-smtp-out                            80
+    smtp-pattern-list                       default-throttle
+</domain>
+
+<domain $excite>
+    queue-to                                excite.queue
+</domain>
+<domain excite.queue>
+    route                                   excite.com
+    421-means-mx-unavailable                yes
+    bounce-upon-5xx-greeting                yes
+    deliver-local-dsn                       no
+    log-commands                            yes
+    max-rcpt-per-message                    1
+    max-msg-per-connection                  1
+    max-smtp-out                            1
+    retry-upon-new-mail                     yes
+    backoff-to-normal-after-delivery        yes
+    smtp-pattern-list                       default-throttle
+</domain>
+
+<domain $gmail>
+    queue-to                                gmail.queue
+</domain>
+<domain gmail.queue>
+    route                                   gmail.com
+    421-means-mx-unavailable                yes
+    bounce-upon-5xx-greeting                yes
+    retry-upon-new-mail                     no
+    dkim-sign                               yes
+    dk-sign                                 yes
+    log-commands                            yes
+    max-msg-per-connection                  100
+    max-rcpt-per-message                    100
+    max-smtp-out                            100
+    smtp-pattern-list                       gmail-throttle
+</domain>
+
+<domain $hotmail>
+	queue-to                                hotmail.queue
+</domain>
+<domain hotmail.queue>
+    route                                   hotmail.com
+    421-means-mx-unavailable                yes
+    bounce-upon-5xx-greeting                yes
+    deliver-local-dsn                       no
+    log-commands                            yes      
+    max-msg-per-connection                  50
+    max-rcpt-per-message                    50
+    max-smtp-out                            10
+    smtp-pattern-list                       hotmail-throttle
+</domain>
+
+<domain $juno>
+    queue-to                                juno.queue
+</domain>
+<domain juno.queue>
+    bounce-upon-5xx-greeting                no
+    log-commands                            no
+    max-msg-per-connection                  2
+    max-rcpt-per-message                    1
+    max-smtp-out                            10000
+    smtp-pattern-list                       default-throttle
+</domain>
+
+
+<domain $orange>
+    queue-to                                orange.queue
+</domain>
+<domain orange.queue>
+    route                                   orange.fr
+    421-means-mx-unavailable                yes
+    bounce-upon-5xx-greeting                yes
+    backoff-to-normal-after-delivery        yes
+    deliver-local-dsn                       no
+    log-commands                            yes
+    max-rcpt-per-message                    1
+    max-msg-per-connection                  1
+    max-smtp-out                            2
+    retry-upon-new-mail                     yes
+    smtp-pattern-list                       default-throttle
+</domain>
+
+<domain $sbc>
+    queue-to                                sbc.queue
+</domain>
+<domain sbc.queue>
+    route                                   sbcglobal.net
+    bounce-upon-5xx-greeting                yes
+    connect-timeout                         2s
+    deliver-local-dsn                       no
+    dkim-sign                               yes
+    dk-sign                                 yes
+    log-commands                            yes
+    retry-after                             35s
+    max-msg-per-connection                  3
+    max-rcpt-per-message                    22
+    max-smtp-out                            100
+    smtp-data-termination-timeout           60s
+    retry-upon-new-mail                     yes
+    421-means-mx-unavailable                yes
+    smtp-pattern-list                       yahoo-throttle
+</domain>
+
+<domain $verizon>
+    queue-to                                verizon.queue
+</domain>
+<domain verizon.queue>
+    route                                   verizon.net
+    421-means-mx-unavailable                yes
+    bounce-upon-5xx-greeting                yes
+    backoff-to-normal-after-delivery        yes
+    retry-upon-new-mail                     no
+    bounce-upon-5xx-greeting                yes
+    log-commands                            yes
+    max-rcpt-per-message                    1
+    max-msg-per-connection                  10
+    max-smtp-out                            500
+    smtp-pattern-list                       verizon-throttle
+</domain>
+
+<domain $yahoo>
+    queue-to                                yahoo.queue
+</domain>
+<domain yahoo.queue>
+    route                                   yahoo.com
+    bounce-upon-5xx-greeting                no
+    connect-timeout                         2s
+    deliver-local-dsn                       no
+    dkim-sign                               yes
+    dk-sign                                 yes
+    log-commands                            yes
+    retry-after                             35s
+    max-msg-per-connection                  1
+    max-rcpt-per-message                    22
+    max-smtp-out                            500
+    smtp-data-termination-timeout           60s
+    retry-upon-new-mail                     yes
+    smtp-pattern-list                       yahoo-throttle
+</domain>

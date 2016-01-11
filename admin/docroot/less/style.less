@@ -1,0 +1,63 @@
+/* my new bootstrap site */
+
+@import "bootstrap/bootstrap.less";
+@import "bootstrap/responsive-embed.less";
+
+// import your unique less files as you build 
+
+@import "layout.less"; 
+@import "theme.less";
+@import "typography.less";
+@import "misc.less";  // mixins etc
+
+.panel-main {
+	padding: @panel-body-padding;
+	background-color: darken(@brand-primary, 13.5%);
+	color: @btn-primary-color !important;
+}
+
+.panel-main a {
+	color: @btn-primary-color !important;
+}
+
+.panel-main small {
+	color: @btn-primary-color !important;
+}
+
+.panel-main .text-muted {
+	color: darken(@btn-primary-color, 20%);
+}
+
+.breadcrumb {
+	margin-bottom: 0px;
+	font-size: @font-size-small;
+}
+
+.tab-pane {
+	padding: @panel-body-padding;
+}
+
+.row.vertical-divider div[class^="col-"] + div[class^="col-"] { 
+	text-align: center; 
+	border-left: 3px solid @gray-lighter; 
+}
+
+.row .vertical-divider {
+  overflow: hidden;
+}
+
+ul.list-inline {
+	margin-bottom: 0px;
+}
+
+.nav-tabs-box {
+	margin-bottom: 0;
+}
+
+.tab-pane-box {
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	border-radius: 0px 0px 5px 5px;
+	padding: 10px;
+}
