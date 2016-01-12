@@ -7,7 +7,7 @@
 		<li><a href="/server/index">Servers</a></li>
 		<li class="active">Test IPs</li>
 	</ol>
-
+	<p />
 	<form method="POST" action="/api/ip-test-start" id="send_ip_test_form">
 		<div class="row">
 			<div class="col-md-3 col-lg-2">

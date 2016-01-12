@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nav>
 	<dashboard>
-        <label>Dashboard</label>
+        <label>Documentation</label>
         <uri>/default/index</uri>
         <class>nav-primary</class>
 	</dashboard>

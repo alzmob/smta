@@ -4,7 +4,7 @@
 ?>
 <div class="container-fluid">
 	<div class="page-header">
-		<h1><span class="glyphicon glyphicon-envelope hidden-xs"></span> Domain Groups</h1>
+		<h1>Domain Groups</h1>
 		<div class="text-muted">Domain groups are used throughout the system to group strategies and domains together.  Assign related domains and related strategies to the same domain group.</div>
 	</div>
 	<ol class="breadcrumb">
@@ -12,7 +12,7 @@
 		<li><a href="/admin/domain-group-search">Domain Groups</a></li>
 		<li class="active">Search</li>
 	</ol>
-	
+	<p />
 	<div class="">
 		<div class="panel panel-primary">
 			<div id="domain-header" class="grid-header panel-heading clearfix">

@@ -12,7 +12,7 @@
 		<li><a href="/drop/drop-search">Drops</a></li>
 		<li class="active">New Drop</li>
 	</ol>
-	
+	<p />
 	<form action="/api/drop" method="POST" id="drop_upload_form" enctype="multipart/form-data">
 		<input type="hidden" name="func" id="func" value="/api/drop" />
 		<input type="hidden" name="_id" id="drop_id" value="" />

@@ -11,7 +11,7 @@
 		<li><a href="/server/index">Servers</a></li>
 		<li class="active">PowerMTA Logs</li>
 	</ol>
-	
+	<p />
 	<div>
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist">

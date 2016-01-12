@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-9">
-			<h2 class="page-header" id="js-overview">Overview</h2>
+			<h2 class="page-header" id="js-overview">API Documentation</h2>
 			<div class="help-block">
 				The SMTA Simple Mailer is used to manage a server running PowerMTA and be able to submit drops to it programmatically through a set of
 				APIs that are documented below.  Each API runs using the REST framework.  REST requests use the standard HTTP verbs mapped to various 
@@ -1202,7 +1202,11 @@ mapping[2][default_value] = 'US';
 						</ul>
 					</li>
 				</ul>
+				<ul class="nav">
+					<li><a href="#top">Back to top</a></li>
+				</ul>
 			</nav>	
+			
 		</div>
 	</div>
 </div>

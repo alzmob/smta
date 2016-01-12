@@ -12,7 +12,7 @@
 		<li><a href="/drop/drop-search">Drops</a></li>
 		<li class="active">Drop #<?php echo $drop->getId() ?></li>
 	</ol>
-	
+	<p />
 	<div class="well well-default">
 		<div class="progress">
 			<div class="progress-bar" id="progress-bar-div" role="progressbar" aria-valuenow="<?php echo $drop->getPercentComplete() ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $drop->getPercentComplete() ?>%;"></div>

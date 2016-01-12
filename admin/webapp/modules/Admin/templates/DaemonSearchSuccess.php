@@ -12,7 +12,7 @@
 		<li><a href="/admin/daemon-search">Daemon</a></li>
 		<li class="active">Search</li>
 	</ol>
-	
+	<p />
 	<div class="panel panel-primary">
 		<div id='daemon-header' class='grid-header panel-heading clearfix'>
 			<form id="daemon_search_form" METHOD="GET" action="/api/daemon">

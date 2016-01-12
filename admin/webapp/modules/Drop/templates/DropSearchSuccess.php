@@ -9,7 +9,7 @@
 		<li><a href="/default/index">Home</a></li>
 		<li>Drops</li>
 	</ol>
-	
+	<p />
 	<div class="">
 		<div class="panel panel-primary">
 			<div id='drop-header' class='grid-header panel-heading clearfix'>

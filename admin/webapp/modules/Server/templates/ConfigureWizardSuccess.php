@@ -12,7 +12,7 @@
 		<li><a href="/server/index">Servers</a></li>
 		<li class="active">Configure Server</li>
 	</ol>
-	
+	<p />
 	<form method="POST" action="/api/pmta-config" id="pmta_config_form">
 		<div>
 			<!-- Nav tabs -->
