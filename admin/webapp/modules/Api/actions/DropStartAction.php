@@ -34,6 +34,14 @@ class DropStartAction extends BasicRestAction
 	 * Executes a PUT request
 	 * @return \Mojavi\Form\BasicAjaxForm
 	 */
+	function executePost($input_form) {
+		return $this->executePut($input_form);
+	}
+	
+	/**
+	 * Executes a PUT request
+	 * @return \Mojavi\Form\BasicAjaxForm
+	 */
 	function executePut($input_form) {
 		// Handle PUT Requests
 		$ajax_form = new \Mojavi\Form\BasicAjaxForm();

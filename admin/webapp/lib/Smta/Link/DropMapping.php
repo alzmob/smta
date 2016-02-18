@@ -6,6 +6,15 @@ class DropMapping extends BasicLink {
 	protected $default_value;
 	
 	/**
+	 * Sets the name
+	 * @return \Smta\Link\DropMapping
+	 */
+	function setName($arg0) {
+		$tmp_name = strtoupper(trim(preg_replace("/[^a-z0-9A-Z]+/", "", $arg0)));
+		return parent::setName("[" . $tmp_name . "]");
+	}
+	
+	/**
 	 * Returns the default_value
 	 * @return string
 	 */

@@ -20,6 +20,7 @@
 				<li role="presentation" class="active"><a href="#mainconfig" aria-controls="mainconfig" role="tab" data-toggle="tab">PowerMTA Config</a></li>
 				<li role="presentation"><a href="#domainconfig" aria-controls="domainconfig" role="tab" data-toggle="tab">PowerMTA Domain Config</a></li>
 				<li role="presentation"><a href="#backoffconfig" aria-controls="backoffconfig" role="tab" data-toggle="tab">PowerMTA Backoff Config</a></li>
+				<li role="presentation"><a href="#vmtaconfig" aria-controls="vmtaconfig" role="tab" data-toggle="tab">PowerMTA VirtualMTA Config</a></li>
 			</ul>
 	
 			
@@ -33,6 +34,9 @@
 				</div>
 				<div role="tabpanel" class="tab-pane tab-pane-box" id="backoffconfig">
 					<textarea class="form-control" rows="20" name="backoff_config"><?php echo $pmta_config->getBackoffConfig() ?></textarea>
+				</div>
+				<div role="tabpanel" class="tab-pane tab-pane-box" id="vmtaconfig">
+					<textarea class="form-control" rows="20" name="vmta_config"><?php echo $pmta_config->getVmtaConfig() ?></textarea>
 				</div>
 			</div>
 		</div>

@@ -12,7 +12,7 @@ use Mojavi\View\View;
 class DropRunnerAction extends BasicConsoleAction {
 
 	const DEBUG = MO_DEBUG;
-	const EMAIL_KEY = 'email';
+	const EMAIL_KEY = 'EMAIL';
 
 	/**
 	 * Perform any execution code for this action
@@ -49,9 +49,11 @@ class DropRunnerAction extends BasicConsoleAction {
 	    		
 	    		$keys = array();
 	    		/* @var $mapping \Smta\Link\DropMapping */
-	    		foreach ($drop->getMapping() as $mapping) {
-	    			$keys[] = str_replace("#", "", $mapping->getName());
+	    		foreach ($drop->getMapping() as $key => $mapping) {
+	    			// Strip all special characters from the key
+	    			$keys[$key] = strtoupper(trim(preg_replace("/[^a-z0-9A-Z]+/", "", $mapping->getName())));
 	    		}
+	    		ksort($keys);
 	    		
 	    		$drop->updatePercent(30);
 	    		

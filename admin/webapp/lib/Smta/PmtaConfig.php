@@ -9,6 +9,7 @@ class PmtaConfig extends CommonForm {
 	const CONFIG_LOCATION_MAIN = '/etc/pmta/config';
 	const CONFIG_LOCATION_DOMAIN = '/etc/pmta/domain_config';
 	const CONFIG_LOCATION_BACKOFF = '/etc/pmta/backoff_config';
+	const CONFIG_LOCATION_VMTA = '/etc/pmta/vmta_config';
 	
 	private $ssh_session;
 	
@@ -19,6 +20,7 @@ class PmtaConfig extends CommonForm {
 	protected $main_config;
 	protected $domain_config;
 	protected $backoff_config;
+	protected $vmta_config;
 	
 	/**
 	 * Returns the admin_ip_address
@@ -111,6 +113,14 @@ class PmtaConfig extends CommonForm {
 		} catch (\Exception $e) {
 			$this->getErrors()->addError('error', $e->getMessage());
 		}
+		
+		try {
+			$ret_val = $this->writeRemoteFile($this->getVmtaConfig(), self::CONFIG_LOCATION_VMTA);
+			$this->runRemoteCommand('chown pmta:pmta ' . self::CONFIG_LOCATION_VMTA);
+			$this->runRemoteCommand('dos2unix ' . self::CONFIG_LOCATION_VMTA);
+		} catch (\Exception $e) {
+			$this->getErrors()->addError('error', $e->getMessage());
+		}
 		return true;
 	}
 	
@@ -183,6 +193,30 @@ class PmtaConfig extends CommonForm {
 	function setBackoffConfig($arg0) {
 		$this->backoff_config = $arg0;
 		$this->addModifiedColumn("backoff_config");
+		return $this;
+	}
+	
+	/**
+	 * Returns the vmta_config
+	 * @return string
+	 */
+	function getVmtaConfig() {
+		if (is_null($this->vmta_config)) {
+			$this->vmta_config = $this->runRemoteCommand('cat ' . self::CONFIG_LOCATION_VMTA);
+			if (trim($this->vmta_config) == 'cat: ' . self::CONFIG_LOCATION_VMTA. ': No such file or directory') {
+				$this->vmta_config = '';
+			}
+		}
+		return $this->vmta_config;
+	}
+	
+	/**
+	 * Sets the vmta_config
+	 * @var string
+	 */
+	function setVmtaConfig($arg0) {
+		$this->vmta_config = $arg0;
+		$this->addModifiedColumn("vmta_config");
 		return $this;
 	}
 	

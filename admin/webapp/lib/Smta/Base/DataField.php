@@ -129,7 +129,9 @@ class DataField extends MongoForm {
 	 * @var string
 	 */
 	function setKey($arg0) {
-		$this->key = $arg0;
+		$this->key = strtoupper(trim($arg0));
+		$this->key = preg_replace("/[^a-z0-9A-Z]+/", "", $this->key);
+		$this->key = "[" . $this->key . "]";
 		$this->addModifiedColumn('key');
 		return $this;
 	}

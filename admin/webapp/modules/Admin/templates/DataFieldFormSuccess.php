@@ -33,7 +33,7 @@
 						<input type="text" class="form-control" placeholder="enter POST url parameters that can match to this data field" id="request_fields_<?php echo $data_field->getId() ?>" name="request_fields" value="<?php echo implode(",", $data_field->getRequestFields()) ?>" size="35" />
 					</div>
 					
-					<div class="help-block">Assign a placeholder name enclosed in hash signs (i.e. #email#, #fname#, #phone#)</div>
+					<div class="help-block">Assign a placeholder name enclosed in square brackets without spaces (i.e. [EMAIL], [PHONE], [FNAME], etc)</div>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="enter placeholder name (unique)" id="key_<?php echo $data_field->getId() ?>" name="key" value="<?php echo $data_field->getKey() ?>" size="25" />
 					</div>
