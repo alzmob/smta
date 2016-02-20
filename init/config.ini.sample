@@ -32,7 +32,7 @@ upload_username=flux
 upload_password=m3g@gun
 
 ; Set the location of the log folder where log files should go
-log_folder=/var/log/flux
+log_folder=/var/log/smta
 
 ; Set the Page2Images API Key (http://www.page2images.com/)
 ; API Key for development (*.flux.dev)

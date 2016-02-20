@@ -21,6 +21,7 @@ class DropRunnerAction extends BasicConsoleAction {
 	public function execute ()
 	{
 	    try {
+	    	/* @var \Smta\Drop */
 	    	$drop = new \Smta\Drop();
 	    	$drop->populate($_REQUEST);
 	    	$drop->query();
@@ -57,6 +58,13 @@ class DropRunnerAction extends BasicConsoleAction {
 	    		
 	    		$drop->updatePercent(30);
 	    		
+	    		$from_prefix = 'info';
+	    		$from_domain = $drop->getFromDomain();
+	    		if (strpos($from_domain,'@') !== false) {
+	    			$from_prefix = substr($from_domain, 0, strpos($from_domain, '@'));
+	    			$from_domain = substr($from_domain, strpos($from_domain, '@') + 1);
+	    		}
+	    		
 	    		if (($fh = fopen($drop->getListFileLocation(), 'r')) !== false) {
 	    			$counter = 0;
 	    			while (($line = fgetcsv($fh, 4096, $drop->getDelimiterCharacter(true))) !== false) {
@@ -68,13 +76,14 @@ class DropRunnerAction extends BasicConsoleAction {
 		    				$line_array = array_combine($keys, $line);
 		    				if (isset($line_array[self::EMAIL_KEY])) {
 			    				$tmp_body_contents = 'XACK OFF' . PHP_EOL;
-		                        $tmp_body_contents .= 'EHLO ' . $drop->getFromDomain() . PHP_EOL;
-		                        $tmp_body_contents .= 'XMRG FROM: ' . $drop->getFromDomain() . ' VERP' . PHP_EOL;
+		                        $tmp_body_contents .= 'EHLO ' . trim($from_domain) . PHP_EOL;
+		                        $tmp_body_contents .= 'XMRG FROM: ' . $from_prefix . '@' . trim($from_domain) . ' VERP' . PHP_EOL;
 		                        foreach ($line_array as $key => $value) {
-		                        	$tmp_body_contents .= 'XDFN ' . (strtoupper($key) . '="' . $value . '"') . PHP_EOL;
+		                        	$tmp_body_contents .= 'XDFN ' . (strtoupper($key) . '="' . trim($value) . '"') . PHP_EOL;
 		                        }
+		                        $tmp_body_contents .= 'XDFN FROM="' . trim($from_domain) . '"' . PHP_EOL;
 		                        $tmp_body_contents .= 'XDFN *parts=1 *jobid="' . $drop->getId() . '"' . PHP_EOL;
-		                        $tmp_body_contents .= 'RCPT TO: <' . $line_array[self::EMAIL_KEY] . '>' . PHP_EOL;
+		                        $tmp_body_contents .= 'RCPT TO: <' . trim($line_array[self::EMAIL_KEY]) . '>' . PHP_EOL;
 								$tmp_body_contents .= 'XPRT 1 LAST' . PHP_EOL;
 		                        $tmp_body_contents .= $body_contents;
 		                        $tmp_body_contents .= PHP_EOL . '.' . PHP_EOL;
