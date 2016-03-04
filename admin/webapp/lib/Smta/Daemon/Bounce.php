@@ -141,10 +141,11 @@ class Bounce extends BaseDaemon {
 	 * @return string
 	 */
 	protected function getNextFile() {
-		$files = scandir('/var/log/pmta/bounce/');
+		$acct_folder = '/var/log/pmta/bounce/';
+		$files = scandir($acct_folder);
 		foreach ($files as $file) {
 			if (strpos($file, '.') === 0) { continue; }
-			if (is_dir($file)) { continue; }
+			if (is_dir($acct_folder . $file)) { continue; }
 			return $file;
 		}
 		return null;

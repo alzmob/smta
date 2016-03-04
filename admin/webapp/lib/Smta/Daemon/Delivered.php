@@ -126,10 +126,11 @@ class Delivered extends BaseDaemon {
 	 * @return string
 	 */
 	protected function getNextFile() {
-		$files = scandir('/var/log/pmta/delivered');
+		$acct_folder = '/var/log/pmta/delivered/';
+		$files = scandir($acct_folder);
 		foreach ($files as $file) {
 			if (strpos($file, '.') === 0) { continue; }
-			if (is_dir(MO_WEBAPP_DIR . '/meta/accounting/delivered/' . $file)) { continue; }
+			if (is_dir($acct_folder . $file)) { continue; }
 			return $file;
 		}
 		return null;
