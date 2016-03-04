@@ -30,6 +30,26 @@
 		Log File: <?php echo $drop->getLogFilename() ?> (<a href="/drop/drop-log?_id=<?php echo $drop->getId() ?>" data-toggle="modal" data-target="#drop_log_modal">view log</a>)
 	</div>
 	<hr />
+	<h3>Drop Stats</h3>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>List Size</th>
+				<th>Queued</th>
+				<th>Delivered</th>
+				<th>Bounced</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><?php echo number_format($drop->getReportStats()->getListSize(), 0, null, ',') ?></td>
+				<td><?php echo number_format($drop->getReportStats()->getQueueSize(), 0, null, ',') ?></td>
+				<td><?php echo number_format($drop->getReportStats()->getDeliveredSize(), 0, null, ',') ?></td>
+				<td><?php echo number_format($drop->getReportStats()->getBounceSize(), 0, null, ',') ?></td>
+			</tr>
+		</tbody>
+	</table>
+	<hr />
 	<h3>Mapping</h3>
 	<table class="table table-bordered">
 		<thead>

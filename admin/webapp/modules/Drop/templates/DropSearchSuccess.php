@@ -43,6 +43,9 @@ $(document).ready(function() {
 			ret_val += '</div>';
 			return ret_val;
   		}},
+  		{id:'drop_time', name:'created', field:'drop_time', cssClass:'', def_value: ' ', sortable:true, type: 'string', formatter: function(row, cell, value, columnDef, dataContext) {
+  			return moment.unix(value.sec).calendar();
+  		}},
   		{id:'description', name:'description', field:'description', cssClass:'', def_value: ' ', sortable:true, hidden: true, type: 'string', formatter: function(row, cell, value, columnDef, dataContext) {
   			return value;
   		}},

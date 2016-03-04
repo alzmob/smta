@@ -5,7 +5,7 @@ class DropStats extends BasicLink {
 	
 	protected $list_size;
 	protected $queue_size;
-	protected $deliverd_size;
+	protected $delivered_size;
 	protected $bounce_size;
 	
 	protected $drop_start_time;
