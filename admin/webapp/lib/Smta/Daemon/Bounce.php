@@ -23,7 +23,7 @@ class Bounce extends BaseDaemon {
 			$pending_records = $this->calculatePendingRecordCount(); 
 		}
 		
-		$acct_folder = MO_WEBAPP_DIR . '/meta/accounting/bounce/';
+		$acct_folder = '/var/log/pmta/bounce/';
 		$file = $this->getNextFile();
 		if (!is_null($file)) {
 			// Process the import
@@ -141,7 +141,7 @@ class Bounce extends BaseDaemon {
 	 * @return string
 	 */
 	protected function getNextFile() {
-		$files = scandir(MO_WEBAPP_DIR . '/meta/accounting/bounce');
+		$files = scandir('/var/log/pmta/bounce/');
 		foreach ($files as $file) {
 			if (strpos($file, '.') === 0) { continue; }
 			if (is_dir($file)) { continue; }
@@ -155,7 +155,7 @@ class Bounce extends BaseDaemon {
 	 * @return boolean
 	 */
 	protected function calculatePendingRecordCount() {
-		$pending_records = count(scandir(MO_WEBAPP_DIR . '/meta/accounting/bounce'));
+		$pending_records = count(scandir('/var/log/pmta/bounce/'));
 		return parent::updatePendingRecordCount($pending_records);
 	}
 }

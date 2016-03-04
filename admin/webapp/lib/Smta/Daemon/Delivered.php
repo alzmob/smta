@@ -23,7 +23,7 @@ class Delivered extends BaseDaemon {
 			$pending_records = $this->calculatePendingRecordCount(); 
 		}
 		
-		$acct_folder = MO_WEBAPP_DIR . '/meta/accounting/delivered/';
+		$acct_folder = '/var/log/pmta/delivered';
 		$file = $this->getNextFile();
 		if (!is_null($file)) {
 			// Process the import
@@ -126,7 +126,7 @@ class Delivered extends BaseDaemon {
 	 * @return string
 	 */
 	protected function getNextFile() {
-		$files = scandir(MO_WEBAPP_DIR . '/meta/accounting/delivered');
+		$files = scandir('/var/log/pmta/delivered');
 		foreach ($files as $file) {
 			if (strpos($file, '.') === 0) { continue; }
 			if (is_dir(MO_WEBAPP_DIR . '/meta/accounting/delivered/' . $file)) { continue; }
@@ -140,7 +140,7 @@ class Delivered extends BaseDaemon {
 	 * @return boolean
 	 */
 	protected function calculatePendingRecordCount() {
-		$pending_records = count(scandir(MO_WEBAPP_DIR . '/meta/accounting/delivered'));
+		$pending_records = count(scandir('/var/log/pmta/delivered'));
 		return parent::updatePendingRecordCount($pending_records);
 	}
 }
