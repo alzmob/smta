@@ -112,12 +112,12 @@ class Bounce extends BaseDaemon {
 				// Handle the bounce messages
 				$cmd = 'cat ' . $acct_folder . DIRECTORY_SEPARATOR . $file . ' | grep "^b," | php -r \'if (($fh = fopen("php://stdin", "r")) !== false) { while (($line = fgetcsv($fh, 4096))) { echo implode("|", $line) . "\n"; } }\' | awk -F\| \'NR>1 {print $' .  implode('"|"$', $awk_cols) . '}\'';
 				$bounce_lines = explode("\n", trim(shell_exec($cmd)));
+				if (!file_exists("/home/smtaftp/bounces/")) {
+					mkdir("/home/smtaftp/bounces/", 0775);
+				}
 				foreach ($bounce_lines as $bounce_line) {
 					$bounce_parts = explode("|", $bounce_line);
-					if (!file_exists(MO_WEBAPP_DIR . "/meta/uploads/stats/" . $bounce_parts[4])) {
-						mkdir(MO_WEBAPP_DIR . "/meta/uploads/stats/" . $bounce_parts[4], 0775);
-					}
-					if (($fh = fopen(MO_WEBAPP_DIR . "/meta/uploads/stats/" . $bounce_parts[4] . '/bounces.txt', 'a')) !== false) {
+					if (($fh = fopen("/home/smtaftp/bounces/" . $bounce_parts[4] . ".txt", 'a')) !== false) {
 						fwrite($fh, implode(",", $bounce_parts) . "\n");
 						fclose($fh);
 					}

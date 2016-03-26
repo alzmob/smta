@@ -98,12 +98,12 @@ class Delivered extends BaseDaemon {
 				// Handle the bounce messages
 				$cmd = 'cat ' . $acct_folder . DIRECTORY_SEPARATOR . $file . ' | grep "^b," | php -r \'if (($fh = fopen("php://stdin", "r")) !== false) { while (($line = fgetcsv($fh, 4096))) { echo implode("|", $line) . "\n"; } }\' | awk -F\| \'NR>1 {print $' .  implode('"|"$', $awk_cols) . '}\'';
 				$delivered_lines = explode("\n", trim(shell_exec($cmd)));
+				if (!file_exists("/home/smtaftp/delivered/")) {
+					mkdir("/home/smtaftp/delivered/", 0775);
+				}
 				foreach ($delivered_lines as $delivered_line) {
 					$delivered_parts = explode("|", $delivered_line);
-					if (!file_exists(MO_WEBAPP_DIR . "/meta/uploads/stats/" . $delivered_parts[3])) {
-						mkdir(MO_WEBAPP_DIR . "/meta/uploads/stats/" . $delivered_parts[3], 0775);
-					}
-					if (($fh = fopen(MO_WEBAPP_DIR . "/meta/uploads/stats/" . $delivered_parts[3] . '/delivered.txt', 'a')) !== false) {
+					if (($fh = fopen("/home/smtaftp/delivered/" . $delivered_parts[3] . ".txt", 'a')) !== false) {
 						fwrite($fh, implode(",", $delivered_parts) . "\n");
 						fclose($fh);
 					}

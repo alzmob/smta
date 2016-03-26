@@ -20,7 +20,7 @@
 			<div role="tabpanel" class="tab-pane tab-pane-box active" id="webconsole">
 				<iframe src="http://<?php echo \Smta\Setting::getSetting("ADMIN_IP_ADDRESS") ?>:8080" frameborder="0" style="width:100%;height:800px;"></iframe>
 			</div>
-			<div role="tabpanel" class="tab-pane tab-pane-box active" id="rawconsole">
+			<div role="tabpanel" class="tab-pane tab-pane-box" id="rawconsole">
 				<iframe src="/server/pmta-raw-console" frameborder="0" style="width:100%;height:800px;"></iframe>
 			</div>
 		</div>

@@ -45,6 +45,9 @@ class Drop extends MongoForm {
 	protected $force_drop_reset;
 	protected $is_drop_finished;
 	
+	protected $bounce_file;
+	protected $delivered_file;
+	
 	private $upload_file_type;
 	
 	/**
@@ -684,6 +687,48 @@ class Drop extends MongoForm {
 	function setIsDropFinished($arg0) {
 		$this->is_drop_finished = $arg0;
 		$this->addModifiedColumn("is_drop_finished");
+		return $this;
+	}
+	
+	/**
+	 * Returns the bounce_file
+	 * @return string
+	 */
+	function getBounceFile() {
+		if (is_null($this->bounce_file)) {
+			$this->bounce_file = "/home/smtaftp/bounces/" . $this->getId() . ".txt";
+		}
+		return $this->bounce_file;
+	}
+	
+	/**
+	 * Sets the bounce_file
+	 * @var string
+	 */
+	function setBounceFile($arg0) {
+		$this->bounce_file = $arg0;
+		$this->addModifiedColumn("bounce_file");
+		return $this;
+	}
+	
+	/**
+	 * Returns the delivered_file
+	 * @return string
+	 */
+	function getDeliveredFile() {
+		if (is_null($this->delivered_file)) {
+			$this->delivered_file = "/home/smtaftp/delivered/" . $this->getId() . ".txt";
+		}
+		return $this->delivered_file;
+	}
+	
+	/**
+	 * Sets the delivered_file
+	 * @var string
+	 */
+	function setDeliveredFile($arg0) {
+		$this->delivered_file = $arg0;
+		$this->addModifiedColumn("delivered_file");
 		return $this;
 	}
 	

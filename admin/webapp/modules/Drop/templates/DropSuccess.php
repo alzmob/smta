@@ -24,10 +24,13 @@
 	</div>
 	
 	<div class="help-block">
-		Original File: <?php echo $drop->getListFileLocation() ?><p />
-		List File: <?php echo $drop->getFilename() ?><p />
-		From Domain: <?php echo $drop->getFromDomain() ?><p />
+		Original File: <?php echo $drop->getListFileLocation() ?><br />
+		List File: <?php echo $drop->getFilename() ?><br /><br />
+		From Domain: <?php echo $drop->getFromDomain() ?><br /><br />
 		Log File: <?php echo $drop->getLogFilename() ?> (<a href="/drop/drop-log?_id=<?php echo $drop->getId() ?>" data-toggle="modal" data-target="#drop_log_modal">view log</a>)
+		<br /><br />
+		Bounces: <?php echo $drop->getBounceFile() ?> <?php if (!file_exists($drop->getBounceFile())) { ?><span class="small bg-warning">No bounces yet or missing file</span><?php } ?><br />
+		Delivered: <?php echo $drop->getDeliveredFile() ?> <?php if (!file_exists($drop->getDeliveredFile())) { ?><span class="small bg-warning">No deliverables yet or missing file</span><?php } ?>
 	</div>
 	<hr />
 	<h3>Drop Stats</h3>
