@@ -248,23 +248,19 @@ class Ftp extends Base\Ftp {
 		if ($this->getHomeFolder() != '') {
 			$dirs_to_create[] = $this->getHomeFolder() . '/processed';
 			$dirs_to_create[] = $this->getHomeFolder() . '/exports';
-			$dirs_to_create[] = $this->getHomeFolder() . '/exports/processed';
 			$dirs_to_create[] = $this->getHomeFolder() . '/imports';
-			$dirs_to_create[] = $this->getHomeFolder() . '/imports/processed';
 			$dirs_to_create[] = $this->getHomeFolder() . '/bounces';
-			$dirs_to_create[] = $this->getHomeFolder() . '/bounces/processed';
+			$dirs_to_create[] = $this->getHomeFolder() . '/delivered';
 			$dirs_to_create[] = $this->getHomeFolder() . '/unsubs';
-			$dirs_to_create[] = $this->getHomeFolder() . '/unsubs/processed';
+			$dirs_to_create[] = $this->getHomeFolder() . '/raw';
 		} else {
 			$dirs_to_create[] = '/home/' . $this->getUsername() . '/processed';
 			$dirs_to_create[] = '/home/' . $this->getUsername() . '/exports';
-			$dirs_to_create[] = '/home/' . $this->getUsername() . '/exports/processed';
 			$dirs_to_create[] = '/home/' . $this->getUsername() . '/imports';
-			$dirs_to_create[] = '/home/' . $this->getUsername() . '/imports/processed';
 			$dirs_to_create[] = '/home/' . $this->getUsername() . '/bounces';
-			$dirs_to_create[] = '/home/' . $this->getUsername() . '/bounces/processed';
 			$dirs_to_create[] = '/home/' . $this->getUsername() . '/unsubs';
-			$dirs_to_create[] = '/home/' . $this->getUsername() . '/unsubs/processed';
+			$dirs_to_create[] = '/home/' . $this->getUsername() . '/delivered';
+			$dirs_to_create[] = '/home/' . $this->getUsername() . '/raw';
 		}
 		foreach ($dirs_to_create as $dir_to_create) {
 			if (!file_exists($dir_to_create)) {

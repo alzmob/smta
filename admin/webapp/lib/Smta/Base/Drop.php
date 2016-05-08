@@ -695,20 +695,7 @@ class Drop extends MongoForm {
 	 * @return string
 	 */
 	function getBounceFile() {
-		if (is_null($this->bounce_file)) {
-			$this->bounce_file = "/home/smtaftp/bounces/" . $this->getId() . ".txt";
-		}
-		return $this->bounce_file;
-	}
-	
-	/**
-	 * Sets the bounce_file
-	 * @var string
-	 */
-	function setBounceFile($arg0) {
-		$this->bounce_file = $arg0;
-		$this->addModifiedColumn("bounce_file");
-		return $this;
+		return "/home/smtaftp/bounces/" . $this->getId() . ".txt";
 	}
 	
 	/**
@@ -716,20 +703,7 @@ class Drop extends MongoForm {
 	 * @return string
 	 */
 	function getDeliveredFile() {
-		if (is_null($this->delivered_file)) {
-			$this->delivered_file = "/home/smtaftp/delivered/" . $this->getId() . ".txt";
-		}
-		return $this->delivered_file;
-	}
-	
-	/**
-	 * Sets the delivered_file
-	 * @var string
-	 */
-	function setDeliveredFile($arg0) {
-		$this->delivered_file = $arg0;
-		$this->addModifiedColumn("delivered_file");
-		return $this;
+		return "/home/smtaftp/delivered/" . $this->getId() . ".txt";
 	}
 	
 	/**

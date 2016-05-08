@@ -96,21 +96,23 @@ class Delivered extends BaseDaemon {
 					}
 				}
 				// Handle the bounce messages
-				$cmd = 'cat ' . $acct_folder . DIRECTORY_SEPARATOR . $file . ' | grep "^b," | php -r \'if (($fh = fopen("php://stdin", "r")) !== false) { while (($line = fgetcsv($fh, 4096))) { echo implode("|", $line) . "\n"; } }\' | awk -F\| \'NR>1 {print $' .  implode('"|"$', $awk_cols) . '}\'';
+				$cmd = 'cat ' . $acct_folder . DIRECTORY_SEPARATOR . $file . ' | grep "^d," | php -r \'if (($fh = fopen("php://stdin", "r")) !== false) { while (($line = fgetcsv($fh, 4096))) { echo implode("|", $line) . "\n"; } }\' | awk -F\| \'NR>1 {print $' .  implode('"|"$', $awk_cols) . '}\'';
 				$delivered_lines = explode("\n", trim(shell_exec($cmd)));
 				if (!file_exists("/home/smtaftp/delivered/")) {
 					mkdir("/home/smtaftp/delivered/", 0775);
 				}
 				foreach ($delivered_lines as $delivered_line) {
 					$delivered_parts = explode("|", $delivered_line);
-					if (($fh = fopen("/home/smtaftp/delivered/" . $delivered_parts[3] . ".txt", 'a')) !== false) {
-						fwrite($fh, implode(",", $delivered_parts) . "\n");
-						fclose($fh);
+					if (isset($delivered_parts[3])) {
+						if (($fh = fopen("/home/smtaftp/delivered/" . $delivered_parts[3] . ".txt", 'a')) !== false) {
+							fwrite($fh, implode(",", $delivered_parts) . "\n");
+							fclose($fh);
+						}
 					}
 				}
 				
 				
-				if (!rename($acct_folder . DIRECTORY_SEPARATOR . $file, $acct_folder . DIRECTORY_SEPARATOR . 'processed' . DIRECTORY_SEPARATOR . $file)) {
+				if (!rename($acct_folder . DIRECTORY_SEPARATOR . $file, '/home/smtaftp/raw/' . $file)) {
 					$this->log('Error Deleting file ' . $file, array($this->pid));
 				}
 				

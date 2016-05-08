@@ -117,15 +117,17 @@ class Bounce extends BaseDaemon {
 				}
 				foreach ($bounce_lines as $bounce_line) {
 					$bounce_parts = explode("|", $bounce_line);
-					if (($fh = fopen("/home/smtaftp/bounces/" . $bounce_parts[4] . ".txt", 'a')) !== false) {
-						fwrite($fh, implode(",", $bounce_parts) . "\n");
-						fclose($fh);
+					if (isset($bounce_parts[4])) {
+						if (($fh = fopen("/home/smtaftp/bounces/" . $bounce_parts[4] . ".txt", 'a')) !== false) {
+							fwrite($fh, implode(",", $bounce_parts) . "\n");
+							fclose($fh);
+						}
 					}
 				}
 				
 				
 				
-				if (!rename($acct_folder . DIRECTORY_SEPARATOR . $file, $acct_folder . DIRECTORY_SEPARATOR . 'processed' . DIRECTORY_SEPARATOR . $file)) {
+				if (!rename($acct_folder . DIRECTORY_SEPARATOR . $file, '/home/smtaftp/raw/' . $file)) {
 					$this->log('Error Deleting file ' . $file, array($this->pid));
 				}
 				

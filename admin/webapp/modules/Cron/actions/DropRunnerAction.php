@@ -96,6 +96,8 @@ class DropRunnerAction extends BasicConsoleAction {
 		                        
 		                        chmod($temp_filename, 0777);
 		                        rename($temp_filename, MO_WEBAPP_DIR . '/meta/drops/' . basename($temp_filename));
+		                        
+		                        $drop->updateQueueCount(1);
 		    				} else {
 		    					throw new \Exception('Email missing');
 		    				}

@@ -56,4 +56,13 @@ class Drop extends Base\Drop {
 		$this->setPercentComplete($percent_complete);
 		return true;
 	}
+	
+	/**
+	 * Updates the number queued
+	 * @return integer $queue_count
+	 */
+	function updateQueueCount($queue_count) {
+		$this->update(array('_id' => $this->getId()), array('$set' => array('report_stats.queue_size' => $queue_count)));
+		return true;
+	}
 }
